@@ -1,0 +1,26 @@
+#+TITLE: Env_config library
+
+The =Env_config= library is a helper for retrieving library and program configuration from an environment variable.
+
+Its goal is to make it easy to override a configuration that is loaded from disk, computed, or embedded in a library.
+
+The ways in which the library allows for configurations to be provided are by:
+1. Placing a sexp in the environment variable, completely describing the configuration
+2. Placing a sexp of an /Override/ in the environment variable, which is applied to the default configuration
+
+* How to use it
+
+** Define a =Configuration=
+
+ The library demands that its users create a =[Configuration]=, which specifies
+ the name of the environment variable, documentation, sexp deserializers
+
+** Apply the functor
+
+ Depending on how your program/library works, you will apply the =[Load_from_disk]= or =[Embedded_in_library]= functor.
+
+ There are both blocking and async versions of these.
+
+** Request the configuration
+
+ From the applied functor, call =[get_config_exn]=.

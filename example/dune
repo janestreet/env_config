@@ -1,0 +1,2 @@
+(executables (names example) (libraries core env_config)
+ (preprocess (pps ppx_jane)))
