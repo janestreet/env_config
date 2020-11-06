@@ -68,9 +68,13 @@ struct
 
   let get_config_exn () =
     let%bind default_config =
-      Deferred.Or_error.try_with (fun () ->
-        let%bind path = Configuration.default_path () in
-        Configuration.load_from_disk ~path)
+      Deferred.Or_error.try_with
+        ~run:
+          `Schedule
+        ~rest:`Log
+        (fun () ->
+           let%bind path = Configuration.default_path () in
+           Configuration.load_from_disk ~path)
     in
     match Configuration.from_env_result ~default_config with
     | Ok x -> return x
