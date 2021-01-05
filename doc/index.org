@@ -1,5 +1,4 @@
 #+TITLE: Env_config library
-#+UUID: f1ba4b58-32f3-3548-b0b7-5eca7fb614cb
 
 The =Env_config= library is a helper for retrieving library and program configuration from an environment variable.
 
