@@ -1,2 +1,2 @@
-(executables (names example) (libraries core env_config)
+(executables (names example) (libraries core.command_unix core env_config)
  (preprocess (pps ppx_jane)))

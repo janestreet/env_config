@@ -163,5 +163,5 @@ let () =
          else Deferred.unit
        in
        Deferred.unit)
-  |> Command.run
+  |> Command_unix.run
 ;;
