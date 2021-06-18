@@ -27,7 +27,7 @@ struct
       (match Could_not_load.environment_value cnl with
        | None -> invalid cnl
        | Some environment_value ->
-         (match Sys.file_exists environment_value with
+         (match Sys_unix.file_exists environment_value with
           | `No | `Unknown ->
             invalid cnl ~extra_context:"environment value is not a file path"
           | `Yes ->
