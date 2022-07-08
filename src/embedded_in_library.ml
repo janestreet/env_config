@@ -29,8 +29,7 @@ struct
   let get_config_exn () =
     let%map default_config =
       Deferred.Or_error.try_with
-        ~run:
-          `Schedule
+        ~run:`Schedule
         ~rest:`Log
         (fun () -> Configuration.default ())
     in
@@ -45,8 +44,7 @@ module Async (Configuration : Configuration_intf.Embedded_in_library.Async) = st
   let get_config_exn () =
     let%map default_config =
       Deferred.Or_error.try_with
-        ~run:
-          `Schedule
+        ~run:`Schedule
         ~rest:`Log
         (fun () -> Configuration.default ())
     in

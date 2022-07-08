@@ -69,8 +69,7 @@ struct
   let get_config_exn () =
     let%bind default_config =
       Deferred.Or_error.try_with
-        ~run:
-          `Schedule
+        ~run:`Schedule
         ~rest:`Log
         (fun () ->
            let%bind path = Configuration.default_path () in
