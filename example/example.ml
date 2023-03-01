@@ -163,5 +163,6 @@ let () =
          else Deferred.unit
        in
        Deferred.unit)
+    ~behave_nicely_in_pipeline:false
   |> Command_unix.run
 ;;
