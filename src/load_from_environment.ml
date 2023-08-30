@@ -8,11 +8,11 @@ module Gen (Configuration : Configuration_intf.S) = struct
     | None ->
       default_config
       |> Result.map_error ~f:(fun default_config_error ->
-        Could_not_load.Environment_variable_missing
-          { environment_variable = Configuration.environment_variable
-          ; documentation = Configuration.documentation
-          ; default_config_error
-          })
+           Could_not_load.Environment_variable_missing
+             { environment_variable = Configuration.environment_variable
+             ; documentation = Configuration.documentation
+             ; default_config_error
+             })
     | Some value ->
       (match deserialize [%of_sexp: Configuration.t] value with
        | Ok v -> Ok v
