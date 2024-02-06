@@ -1,4 +1,6 @@
-(library (name env_config_test)
+(library
+ (name env_config_test)
  (libraries async core expect_test_helpers_async expect_test_helpers_core
-  expect_test_patterns)
- (preprocess (pps ppx_jane)))
+   expect_test_patterns)
+ (preprocess
+  (pps ppx_jane)))
