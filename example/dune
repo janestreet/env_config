@@ -1,6 +1,6 @@
 (executables
  (modes byte exe)
  (names example)
- (libraries core_unix.command_unix core env_config)
+ (libraries async core_unix.command_unix core env_config)
  (preprocess
   (pps ppx_jane)))

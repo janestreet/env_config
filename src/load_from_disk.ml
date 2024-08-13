@@ -9,10 +9,10 @@ let invalid ?extra_context could_not_load =
 ;;
 
 module Make_blocking (Configuration : sig
-  include Configuration_intf.Load_from_disk.Blocking
+    include Configuration_intf.Load_from_disk.Blocking
 
-  val from_env_result : default_config:t Or_error.t -> (t, Could_not_load.t) Result.t
-end) =
+    val from_env_result : default_config:t Or_error.t -> (t, Could_not_load.t) Result.t
+  end) =
 struct
   include Deserializers.Make (Configuration)
 
@@ -43,25 +43,25 @@ end
 
 module Blocking (Configuration : Configuration_intf.Load_from_disk.Blocking) = struct
   include Make_blocking (struct
-    include Configuration
-    include Load_from_environment.Make (Configuration)
-  end)
+      include Configuration
+      include Load_from_environment.Make (Configuration)
+    end)
 end
 
 module Blocking_overridable
-  (Configuration : Configuration_intf.Load_from_disk.Blocking_overridable) =
+    (Configuration : Configuration_intf.Load_from_disk.Blocking_overridable) =
 struct
   include Make_blocking (struct
-    include Configuration
-    include Load_from_environment.Make_overridable (Configuration)
-  end)
+      include Configuration
+      include Load_from_environment.Make_overridable (Configuration)
+    end)
 end
 
 module Make_async (Configuration : sig
-  include Configuration_intf.Load_from_disk.Async
+    include Configuration_intf.Load_from_disk.Async
 
-  val from_env_result : default_config:t Or_error.t -> (t, Could_not_load.t) Result.t
-end) =
+    val from_env_result : default_config:t Or_error.t -> (t, Could_not_load.t) Result.t
+  end) =
 struct
   open Async
   include Deserializers.Make (Configuration)
@@ -92,16 +92,16 @@ end
 
 module Async (Configuration : Configuration_intf.Load_from_disk.Async) = struct
   include Make_async (struct
-    include Configuration
-    include Load_from_environment.Make (Configuration)
-  end)
+      include Configuration
+      include Load_from_environment.Make (Configuration)
+    end)
 end
 
 module Async_overridable
-  (Configuration : Configuration_intf.Load_from_disk.Async_overridable) =
+    (Configuration : Configuration_intf.Load_from_disk.Async_overridable) =
 struct
   include Make_async (struct
-    include Configuration
-    include Load_from_environment.Make_overridable (Configuration)
-  end)
+      include Configuration
+      include Load_from_environment.Make_overridable (Configuration)
+    end)
 end

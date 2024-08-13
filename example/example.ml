@@ -22,30 +22,30 @@ module Blocking = struct
 
   (** Used for retrieving the config *)
   module Get_config = Env_config.Embedded_in_library.Blocking_overridable (struct
-    include Config
+      include Config
 
-    let default () =
-      { car = "Ford Model T"; phrase = "Gee, Brain, what do you want to do tonight?" }
-    ;;
+      let default () =
+        { car = "Ford Model T"; phrase = "Gee, Brain, what do you want to do tonight?" }
+      ;;
 
-    module Environment_override = struct
-      type t = This_car of string [@@deriving sexp]
-    end
+      module Environment_override = struct
+        type t = This_car of string [@@deriving sexp]
+      end
 
-    let environment_variable = "BLOCKING"
+      let environment_variable = "BLOCKING"
 
-    let from_override ~default_config (Environment_override.This_car car) =
-      let { phrase; _ } = Or_error.ok_exn default_config in
-      { car; phrase }
-    ;;
+      let from_override ~default_config (Environment_override.This_car car) =
+        let { phrase; _ } = Or_error.ok_exn default_config in
+        { car; phrase }
+      ;;
 
-    let documentation =
-      "Use '(This_car STR)' to override the default car. See lib/env_config/example.ml \
-       for a full configuration description."
-    ;;
+      let documentation =
+        "Use '(This_car STR)' to override the default car. See lib/env_config/example.ml \
+         for a full configuration description."
+      ;;
 
-    let allow_extra_fields = false
-  end)
+      let allow_extra_fields = false
+    end)
 end
 
 module Asynchronous = struct
@@ -60,42 +60,42 @@ module Asynchronous = struct
 
   (** Used for retrieving the config *)
   module Get_config = Env_config.Embedded_in_library.Async_overridable (struct
-    open Async
-    include Config
+      open Async
+      include Config
 
-    let default () = return @@ Other "fuscia"
+      let default () = return @@ Other "fuscia"
 
-    module Environment_override = struct
-      type t = Invert [@@deriving sexp]
-    end
+      module Environment_override = struct
+        type t = Invert [@@deriving sexp]
+      end
 
-    let environment_variable = "ASYNC"
+      let environment_variable = "ASYNC"
 
-    let from_override ~default_config Environment_override.Invert =
-      match Or_error.ok_exn default_config with
-      | Other x -> Other (String.rev x)
-      | Green -> Red
-      | Red -> Green
-    ;;
+      let from_override ~default_config Environment_override.Invert =
+        match Or_error.ok_exn default_config with
+        | Other x -> Other (String.rev x)
+        | Green -> Red
+        | Red -> Green
+      ;;
 
-    let documentation =
-      "Use 'Invert' to invert red to green (and vice versa.) Other x will have x \
-       reversed. See lib/env_config/example.ml for a full configuration description."
-    ;;
+      let documentation =
+        "Use 'Invert' to invert red to green (and vice versa.) Other x will have x \
+         reversed. See lib/env_config/example.ml for a full configuration description."
+      ;;
 
-    let allow_extra_fields = false
-  end)
+      let allow_extra_fields = false
+    end)
 end
 
 (* As simple as possible *)
 module Simple = Env_config.Embedded_in_library.Blocking (struct
-  type t = unit [@@deriving sexp]
+    type t = unit [@@deriving sexp]
 
-  let default () = ()
-  let documentation = ""
-  let allow_extra_fields = false
-  let environment_variable = "SIMPLE"
-end)
+    let default () = ()
+    let documentation = ""
+    let allow_extra_fields = false
+    let environment_variable = "SIMPLE"
+  end)
 
 module From_disk = struct
   module Config = struct
@@ -107,35 +107,35 @@ module From_disk = struct
   end
 
   include Env_config.Load_from_disk.Async_overridable (struct
-    include Config
+      include Config
 
-    module Environment_override = struct
-      type t = unit [@@deriving sexp]
-    end
+      module Environment_override = struct
+        type t = unit [@@deriving sexp]
+      end
 
-    let default_path () =
-      let open Async in
-      let%map cwd = Unix.getcwd () in
-      cwd ^/ "from_disk.sexp"
-    ;;
+      let default_path () =
+        let open Async in
+        let%map cwd = Unix.getcwd () in
+        cwd ^/ "from_disk.sexp"
+      ;;
 
-    let from_override ~default_config () =
-      default_config |> Or_error.map ~f:(const ()) |> Environment_override
-    ;;
+      let from_override ~default_config () =
+        default_config |> Or_error.map ~f:(const ()) |> Environment_override
+      ;;
 
-    let documentation =
-      {|
+      let documentation =
+        {|
 An override of () will result in the config using [Environment_override]. |}
-    ;;
+      ;;
 
-    let load_from_disk ~path =
-      let open Async in
-      Reader.load_sexp_exn path [%of_sexp: t]
-    ;;
+      let load_from_disk ~path =
+        let open Async in
+        Reader.load_sexp_exn path [%of_sexp: t]
+      ;;
 
-    let allow_extra_fields = false
-    let environment_variable = "FROM_DISK_CFG"
-  end)
+      let allow_extra_fields = false
+      let environment_variable = "FROM_DISK_CFG"
+    end)
 end
 
 let () =

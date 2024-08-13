@@ -10,7 +10,7 @@ module Blocking (Configuration : Configuration_intf.Embedded_in_library.Blocking
 end
 
 module Blocking_overridable
-  (Configuration : Configuration_intf.Embedded_in_library.Blocking_overridable) =
+    (Configuration : Configuration_intf.Embedded_in_library.Blocking_overridable) =
 struct
   include Load_from_environment.Make_overridable (Configuration)
 
@@ -21,7 +21,7 @@ struct
 end
 
 module Async_overridable
-  (Configuration : Configuration_intf.Embedded_in_library.Async_overridable) =
+    (Configuration : Configuration_intf.Embedded_in_library.Async_overridable) =
 struct
   open Async
   include Load_from_environment.Make_overridable (Configuration)
