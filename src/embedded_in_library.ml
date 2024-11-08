@@ -23,7 +23,7 @@ end
 module Async_overridable
     (Configuration : Configuration_intf.Embedded_in_library.Async_overridable) =
 struct
-  open Async
+  open Async_kernel
   include Load_from_environment.Make_overridable (Configuration)
 
   let get_config_exn () =
@@ -36,7 +36,7 @@ struct
 end
 
 module Async (Configuration : Configuration_intf.Embedded_in_library.Async) = struct
-  open Async
+  open Async_kernel
   include Load_from_environment.Make (Configuration)
 
   let get_config_exn () =

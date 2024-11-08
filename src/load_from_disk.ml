@@ -63,7 +63,8 @@ module Make_async (Configuration : sig
     val from_env_result : default_config:t Or_error.t -> (t, Could_not_load.t) Result.t
   end) =
 struct
-  open Async
+  open Async_kernel
+  open Async_unix
   include Deserializers.Make (Configuration)
 
   let get_config_exn () =

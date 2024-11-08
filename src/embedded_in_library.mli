@@ -1,5 +1,5 @@
 open! Core
-open Async
+open Async_kernel
 
 (** Configurations that are computed at runtime *)
 
