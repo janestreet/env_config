@@ -1,5 +1,5 @@
 open! Core
-open! Async
+open Async_kernel
 
 module type S = sig
   (** Some configuration that a program wants *)

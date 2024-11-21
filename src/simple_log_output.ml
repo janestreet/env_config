@@ -2,7 +2,7 @@ module Stable = struct
   open Core.Core_stable
 
   module V1 = struct
-    module Format = Async.Log.Output.Format.Stable.V1
+    module Format = Async_log.Output.Format.Stable.V1
 
     type t =
       | Stdout
@@ -15,15 +15,16 @@ module Stable = struct
   end
 end
 
-open Core
-open Async
+open! Core
+open Async_log
+open Async_unix
 include Stable.V1
 
-let stdout = lazy (Log.Output.writer `Sexp (force Writer.stdout))
-let stderr = lazy (Log.Output.writer `Sexp (force Writer.stderr))
+let stdout = lazy (Output.writer `Sexp (force Writer.stdout))
+let stderr = lazy (Output.writer `Sexp (force Writer.stderr))
 
 let to_output = function
   | Stdout -> Lazy.force stdout
   | Stderr -> Lazy.force stderr
-  | File { format; filename } -> Log.Output.file format ~filename
+  | File { format; filename } -> Output.file format ~filename
 ;;

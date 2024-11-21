@@ -1,5 +1,5 @@
 open! Core
-open Async
+open Async_kernel
 
 (** Configurations that are loaded from a file on disk.
 
