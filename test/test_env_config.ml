@@ -7,9 +7,8 @@ module Load_from_disk = struct
   type t =
     { save_default_configuration_to_disk : bool
     ; environment_override : [ `None | `String of string | `File ]
-    (** [`None] : no environment override
-        [`File] : environment override of file path with a valid configuration
-        [`String str] : environment override of [str] *)
+    (** [`None] : no environment override [`File] : environment override of file path with
+        a valid configuration [`String str] : environment override of [str] *)
     }
 
   let default_config_path () =

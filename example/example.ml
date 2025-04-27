@@ -1,10 +1,10 @@
 open Core
 
-(** This executable demonstrates usage of [Env_config]. Its sole purpose is to
-    print out what configuration it believes it should have, e.g.
+(** This executable demonstrates usage of [Env_config]. Its sole purpose is to print out
+    what configuration it believes it should have, e.g.
 
-    $ EXAMPLE_CONFIG='(This_car "Porsche Cayman")' ./example.exe
-    ((car "Porsche Cayman") (phrase "Gee, Brain, what do you want to do tonight?"))
+    $ EXAMPLE_CONFIG='(This_car "Porsche Cayman")' ./example.exe ((car "Porsche Cayman")
+    (phrase "Gee, Brain, what do you want to do tonight?"))
 
     See the lib/env_config/test subdirectory for more example invocations. *)
 
