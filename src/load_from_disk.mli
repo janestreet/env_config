@@ -3,9 +3,9 @@ open Async_kernel
 
 (** Configurations that are loaded from a file on disk.
 
-    If the configuration cannot be parsed via [Load_from_environment],
-    and the Configuration's environment value is a file, that file will
-    be loaded and used as the configuration. *)
+    If the configuration cannot be parsed via [Load_from_environment], and the
+    Configuration's environment value is a file, that file will be loaded and used as the
+    configuration. *)
 
 module Blocking (Configuration : Configuration_intf.Load_from_disk.Blocking) : sig
   (** Raises if [Configuration.environment_variable] is set to an invalid value or if
