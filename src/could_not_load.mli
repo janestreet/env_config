@@ -20,6 +20,6 @@ type t =
 (** The value that was read from the environment *)
 val environment_value : t -> string option
 
-(** [raise_exn ?extra_context t] will raise an exception, and print to stderr
-    a description of why parsing failed, [extra_context], as well as documentation. *)
+(** [raise_exn ?extra_context t] will raise an exception, and print to stderr a
+    description of why parsing failed, [extra_context], as well as documentation. *)
 val raise_exn : ?extra_context:string -> t -> 'a

@@ -1,6 +1,7 @@
 (library
  (name env_config)
  (public_name env_config)
- (libraries async core core_unix.sys_unix)
+ (libraries async_kernel async_log.kernel async_log async_unix core
+   core_unix.sys_unix)
  (preprocess
   (pps ppx_jane)))
