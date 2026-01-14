@@ -246,7 +246,6 @@ let%expect_test "config on not on disk, environment override parses (not a file)
   in
   let%bind () = test ~load_from_disk () in
   Expect_test_patterns.require_match
-    [%here]
     {|
     Blocking: ((car"Ford Model T")(phrase"Gee, Brain, what do you want to do tonight?"))
     Simple: ()
