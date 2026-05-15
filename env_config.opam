@@ -20,7 +20,7 @@ depends: [
   "ppx_jane"
   "dune"         {>= "3.17.0"}
 ]
-available: arch != "arm32" & arch != "x86_32"
+available: arch != "x86_32"
 synopsis: "Helper library for retrieving configuration from an environment variable"
 description: "
 The Env_config library is a helper for retrieving library and program
